@@ -10,10 +10,10 @@ class FieldElement():
         else:
             raise ValueError(f"The number {value} must be between 0 and {prime}.")
 
-    def check_prime(self, value):
+    def check_prime(self, num):
         i = 2
-        while i*i <= value:
-            if not(value % i):
+        while i*i <= num:
+            if not(num % i):
                 return False
             i += 1
         return True
