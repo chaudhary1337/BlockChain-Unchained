@@ -13,7 +13,7 @@ class FieldElement():
                 self.prime = prime
             else:
                 raise ValueError(f"The number {prime} is not a prime.")
-        
+
         # Handling Value range
         if 0 <= value < prime:
             self.value = value
@@ -26,6 +26,8 @@ class FieldElement():
 
         Time Complexity: O(sqrt(N))
         """
+        if num == None:
+            return False
         i = 2
         while i*i <= num:
             if not(num % i):
