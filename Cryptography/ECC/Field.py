@@ -1,16 +1,31 @@
 class FieldElement():
-    def __init__(self, value, prime):
-        if self.check_prime(prime):
+    """
+    A class for converting vanilla elements to field elements
+    """
+
+    def __init__(self, value, prime, use_defaults=True):
+        
+        # Handling prime numbers for the field
+        if use_defaults:
             self.prime = prime
         else:
-            raise ValueError(f"The number {prime} is not a prime.")
+            if self.check_prime(prime):
+                self.prime = prime
+            else:
+                raise ValueError(f"The number {prime} is not a prime.")
         
+        # Handling Value range
         if 0 <= value < prime:
             self.value = value
         else:
             raise ValueError(f"The number {value} must be between 0 and {prime}.")
 
     def check_prime(self, num):
+        """
+        checks the input number is prime or not
+
+        Time Complexity: O(sqrt(N))
+        """
         i = 2
         while i*i <= num:
             if not(num % i):
