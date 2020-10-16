@@ -62,12 +62,9 @@ class FieldElement():
             return self.__class__(pow(self.value, other, self.prime), self.prime)
         except:
             raise ValueError("Not possible to raise the Power")
-    
-    def __neg__(self):
-        return -self.value % self.prime
-            
+               
     def __truediv__(self, other):
         try:
-            return self.__pow__(-other)
+            return self.__class__((self.value * pow(other.value, self.prime - 2, self.prime)) % self.prime, self.prime)
         except:
             raise ValueError("Not able to access power function")
