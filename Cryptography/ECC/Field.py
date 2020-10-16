@@ -77,8 +77,11 @@ class FieldElement():
             return self.__class__(pow(self.value, other, self.prime), self.prime)
         except:
             raise ValueError("Not possible to raise the Power")
+    
+    def __neg__(self):
+        return -self.value % self.prime
             
-    def __div__(self, other):
+    def __truediv__(self, other):
         try:
             return self.__pow__(-other)
         except:
@@ -90,5 +93,6 @@ if __name__ == "__main__":
     print("5+3\t:", a+b)
     print("3-5\t:", b-a)
     print("5*3\t:", a*b)
+    print("5/3\t:", a/b)
     print("5**3\t:", a**3)
     print("5**3*3\t:", a**3 * b)
