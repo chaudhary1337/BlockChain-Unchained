@@ -71,7 +71,6 @@ class ECPoint():
 
         x = m**2 - self.x - other.x
         y = m*(self.x - x) - self.y
-        print(f"SLOPE: {m}, x: {x}, y: {y}")
         return self.__class__(x, y, self.a, self.b, self.p, self.use_defaults)
 
 
