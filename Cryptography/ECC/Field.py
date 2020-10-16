@@ -17,6 +17,9 @@ class FieldElement():
         except:
             return False
     
+    def __ne__(self, other):
+        return not (self == other)
+    
     def __repr__(self):
         return f"Value: {self.value}\t Over Field: Z({self.prime})"
     
