@@ -20,13 +20,12 @@ class ECPoint():
         # Checking for Curve Validity
         if not self.valid_curve():
             raise ValueError("Curve has singular Points. Not valid!")
-        
-        
+         
         # Checking Point validity
         if x == 'inf' and y == 'inf':
             self.x = None
             self.y = None
-        elif x and y:
+        elif x != 'inf' and y != 'inf':
             self.x = x
             self.y = y
         else:
@@ -43,7 +42,22 @@ class ECPoint():
             return True
         else:
             return (self.y**2 == self.b + self.a*self.x + self.x**3)
-    
+
+    def __repr__(self):
+        if self.x is None:
+            return 'Point(infinity)'
+        elif isinstance(self.x, FieldElement):
+            return f"Point({self.x},{self.y})\ta, b: {self.a}, {self.b}\tover: Z({self.p})"
+        else:
+            return f"Point({self.x},{self.y})\ta, b: {self.a}, {self.b}"
+
+    def __eq__(self, other):
+        return self.x == other.x and self.y == other.y \
+            and self.a == other.a and self.b == other.b
+
+    def __ne__(self, other):
+        return not (self == other)
+
     def __add__(self, other):
         try:
             if self.a != other.a or self.b != other.b or self.p != other.p:
@@ -73,12 +87,11 @@ class ECPoint():
         y = m*(self.x - x) - self.y
         return self.__class__(x, y, self.a, self.b, self.p, self.use_defaults)
 
-
     def __mul__(self, other):
         pass
 
-point1 = ECPoint('inf', 'inf', use_defaults=False, a=0, b=7, p=223)
-point2 = ECPoint(x=FieldElement(47, 223, False), y=FieldElement(71, 223, False), use_defaults=False, a=0, b=7, p=223)
-point3 = ECPoint(x=FieldElement(17, 223, False), y=FieldElement(56, 223, False), use_defaults=False, a=0, b=7, p=223)
+# point1 = ECPoint('inf', 'inf', use_defaults=False, a=0, b=7, p=223)
+# point2 = ECPoint(x=FieldElement(47, 223), y=FieldElement(71, 223), use_defaults=False, a=0, b=7, p=223)
+# point3 = ECPoint(x=FieldElement(17, 223), y=FieldElement(56, 223), use_defaults=False, a=0, b=7, p=223)
 
-point4 = point2+point3
+# point4 = point3+point2    
