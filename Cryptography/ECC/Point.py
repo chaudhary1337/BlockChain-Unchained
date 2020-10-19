@@ -43,6 +43,14 @@ class ECPoint():
         else:
             return (self.y**2 == self.b + self.a*self.x + self.x**3)
 
+    def get_order(self):
+        i = 2
+        point = i*self
+        while (point != self):
+            i += 1
+            point = i*self
+        return i
+
     def __repr__(self):
         if self.x is None:
             return 'Point(infinity)'
@@ -53,7 +61,7 @@ class ECPoint():
 
     def __eq__(self, other):
         return self.x == other.x and self.y == other.y \
-            and self.a == other.a and self.b == other.b
+            and self.a == other.a and self.b == other.b and self.p == other.p
 
     def __ne__(self, other):
         return not (self == other)
@@ -79,7 +87,7 @@ class ECPoint():
             m = (self.y-other.y)/(self.x-other.x)
         else:
             if self.y:
-                m = (3*self.x**2 + self.a)/(2*self.y)
+                m = (self.a + 3*self.x**2)/(2*self.y)
             else:
                 return self.__class__('inf', 'inf', self.a, self.b, self.p, self.use_defaults)
 
@@ -87,11 +95,22 @@ class ECPoint():
         y = m*(self.x - x) - self.y
         return self.__class__(x, y, self.a, self.b, self.p, self.use_defaults)
 
-    def __mul__(self, other):
-        pass
+    def __rmul__(self, coeff):
+        current = self
+        result = self.__class__('inf', 'inf', self.a, self.b, self.p, self.use_defaults)
+
+        while coeff:
+            if coeff & 1:
+                result += current
+            current += current
+            coeff >>= 1
+        
+        return result
 
 # point1 = ECPoint('inf', 'inf', use_defaults=False, a=0, b=7, p=223)
 # point2 = ECPoint(x=FieldElement(47, 223), y=FieldElement(71, 223), use_defaults=False, a=0, b=7, p=223)
 # point3 = ECPoint(x=FieldElement(17, 223), y=FieldElement(56, 223), use_defaults=False, a=0, b=7, p=223)
 
 # point4 = point3+point2    
+
+# print(point2.get_order())
