@@ -3,7 +3,15 @@ from Field import FieldElement
 class ECPoint():
     def __init__(self, x=None, y=None, a=None, b=None, p=None, use_defaults=True):    
         """
-        Using defaults will override the provided value(s) is any.
+        inputs:
+            x: x coordinate
+            y: y coordinate
+            a: the coefficient of x in the function
+            b: the constant term in the function
+            p: the prime number over which the fields are defined
+            use_defaults:
+                Using defaults will override the provided value(s) is any, 
+                and assign with secp256k1 standard (used in BitCoin).
         """
         self.use_defaults = use_defaults
 
@@ -31,42 +39,37 @@ class ECPoint():
         else:
             raise ValueError("x and y must be both valid or both 'inf'")
 
-        if not self.point_on_curve():
+        if not self.is_point_on_curve():
             raise ValueError("Point Specified must be on the Curve")
-            
-    def valid_curve(self):
-        return bool(4 * self.a**3 + 27 * self.b**2)
-    
-    def point_on_curve(self):
-        if self.x == None and self.y == None:
-            return True
-        else:
-            return (self.y**2 == self.b + self.a*self.x + self.x**3)
-
-    def get_order(self):
-        i = 2
-        point = i*self
-        while (point != self):
-            i += 1
-            point = i*self
-        return i
 
     def __repr__(self):
+        """
+        How the point is represented when the point object is printed
+        """
         if self.x is None:
             return 'Point(infinity)'
         elif isinstance(self.x, FieldElement):
-            return f"Point({self.x},{self.y})\ta, b: {self.a}, {self.b}\tover: Z({self.p})"
+            return f"Point(\n\tx: {self.x}\n\ty: {self.y}\n) a, b: {self.a}, {self.b}\tover: Z({self.p})"
         else:
             return f"Point({self.x},{self.y})\ta, b: {self.a}, {self.b}"
 
     def __eq__(self, other):
+        """
+        checks whether two points are equal
+        """
         return self.x == other.x and self.y == other.y \
             and self.a == other.a and self.b == other.b and self.p == other.p
 
     def __ne__(self, other):
+        """
+        checks whether two points are NOT equal
+        """
         return not (self == other)
 
     def __add__(self, other):
+        """
+        adds two point objects
+        """
         try:
             if self.a != other.a or self.b != other.b or self.p != other.p:
                 raise TypeError("Points do not lie on the same curve")
@@ -96,6 +99,9 @@ class ECPoint():
         return self.__class__(x, y, self.a, self.b, self.p, self.use_defaults)
 
     def __rmul__(self, coeff):
+        """
+        scalar multiplication using binary exponentiation
+        """
         current = self
         result = self.__class__('inf', 'inf', self.a, self.b, self.p, self.use_defaults)
 
@@ -106,11 +112,51 @@ class ECPoint():
             coeff >>= 1
         
         return result
+    
+    def valid_curve(self):
+        """
+        input:
+            point object
+        return:
+            True or False
+        checks whether the curve is non-singular;
+        without cusps/self-intersections/isolated points
+        """
+        return bool(4 * self.a**3 + 27 * self.b**2)
+    
+
+    def is_point_on_curve(self):
+        """
+        input:
+            point object
+        return:
+            True or False
+        checks whether the point is on the curve or not
+        """
+        if self.x == None and self.y == None:
+            return True
+        else:
+            return (self.y**2 == self.b + self.a*self.x + self.x**3)
+
+    def get_order(self):
+        """
+        input:
+            point object
+        return:
+            The order of the point
+        Usually less than the size of the group itself
+        """
+        i = 2
+        point = i*self
+        while (point != self):
+            i += 1
+            point = i*self
+        return i
 
 # point1 = ECPoint('inf', 'inf', use_defaults=False, a=0, b=7, p=223)
 # point2 = ECPoint(x=FieldElement(47, 223), y=FieldElement(71, 223), use_defaults=False, a=0, b=7, p=223)
 # point3 = ECPoint(x=FieldElement(17, 223), y=FieldElement(56, 223), use_defaults=False, a=0, b=7, p=223)
 
 # point4 = point3+point2    
-
+# print(point4)
 # print(point2.get_order())
