@@ -20,27 +20,35 @@ class ECPoint():
             self.p = (2**256 - 2**32 - 2**9 - 2**8 - 2**7 - 2**6 - 2**4 - 1)
             self.a = 0
             self.b = 7
+            x = 0x79be667ef9dcbbac55a06295ce870b07029bfcdb2dce28d959f2815b16f81798
+            y = 0x483ada7726a3c4655da4fbfc0e1108a8fd17b448a68554199c47d08ffb10d4b8
+            self.x = FieldElement(x, self.p)
+            self.y = FieldElement(y, self.p)
+            self.n = 0xfffffffffffffffffffffffffffffffebaaedce6af48a03bbfd25e8cd0364141
         else:
             self.p = p
             self.a = a
             self.b = b
 
-        # Checking for Curve Validity
-        if not self.valid_curve():
-            raise ValueError("Curve has singular Points. Not valid!")
-         
-        # Checking Point validity
-        if x == 'inf' and y == 'inf':
-            self.x = None
-            self.y = None
-        elif x != 'inf' and y != 'inf':
-            self.x = x
-            self.y = y
-        else:
-            raise ValueError("x and y must be both valid or both 'inf'")
+            # Checking for Curve Validity
+            if not self.valid_curve():
+                raise ValueError("Curve has singular Points. Not valid!")
+            
+            # Checking Point validity
+            if x == 'inf' and y == 'inf':
+                self.x = None
+                self.y = None
+            elif x != 'inf' and y != 'inf':
+                self.x = x
+                self.y = y
+            else:
+                raise ValueError("x and y must be both valid or both 'inf'")
 
-        if not self.is_point_on_curve():
-            raise ValueError("Point Specified must be on the Curve")
+            if not self.is_point_on_curve():
+                raise ValueError("Point Specified must be on the Curve")
+            
+            # if points are on the curve, we can get the order
+            self.n = self.get_order()
 
     def __repr__(self):
         """
@@ -160,3 +168,4 @@ class ECPoint():
 # point4 = point3+point2    
 # print(point4)
 # print(point2.get_order())
+# print(ECPoint(use_defaults=True))
