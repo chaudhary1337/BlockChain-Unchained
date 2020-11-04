@@ -1,4 +1,5 @@
 import random
+from math import gcd as fast_gcd
 
 def generate_prime(n=1024):
     """
@@ -17,13 +18,9 @@ def get_totient(p, q):
     return (p-1)*(q-1)
 
 def gcd(x, y):
-    if y == x:
-        return x
-
-    if x > y:
-        return gcd(x-y, y)
-    
-    return gcd(x, y-x)
+    while b:
+        a, b = b, a % b
+    return x
 
 def is_prime(n, k=8):
     """
@@ -67,3 +64,13 @@ def is_prime(n, k=8):
 
 def mod_inv(x, mod):
     return pow(x, mod-2, mod)
+
+def get_coprime(totient):
+    x = random.randint(2, totient-1)
+    while True:
+        x = random.randint(2, totient-1)
+        try:
+            if fast_gcd(x, totient) == 1: break
+        except:
+            continue
+    return x
