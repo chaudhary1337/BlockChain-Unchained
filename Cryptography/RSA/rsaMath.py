@@ -1,10 +1,17 @@
 import random
 
-def generate_prime():
+def generate_prime(n=1024):
     """
-    TODO
+    generates random prime numbers
+    inputs:
+        n: number of bits in the number
+    return:
+        a prime number
     """
-    pass
+    x = 2
+    while not is_prime(x):
+        x = random.randint(2**(n-1)+1, 2**n-1)
+    return x
 
 def get_totient(p, q):
     return (p-1)*(q-1)
@@ -21,7 +28,8 @@ def gcd(x, y):
 def is_prime(n, k=8):
     """
     uses the miller rabin test. based on probabilities.
-    worst case error bound: 4^(-k)
+    worst case error bound: 4^(-k);
+    that is 1/4^k chance its actually a composite number
 
     source: https://en.wikipedia.org/wiki/Miller%E2%80%93Rabin_primality_test
     """
