@@ -1,12 +1,19 @@
 from RSA import get_keys
 
 class Person():
-    def __init__(self, debug=True):
+    def __init__(self, generate=True, debug=True, data=None):
         if debug:
             print(f"Generating Key Pair ... ", end="")
         
-        self.public_key, self.private_key = get_keys()
-        
+        if generate:
+            self.public_key, self.private_key = get_keys()
+        else:
+            if data:    
+                self.public_key = data['public_key']
+                self.private_key = data['private_key']
+            else:
+                raise ValueError("Data must be input for generate = False")
+
         if debug:
             print(f"Done!")
 
