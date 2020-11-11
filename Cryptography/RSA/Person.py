@@ -1,10 +1,9 @@
 from RSA import get_keys
 
 class Person():
-    def __init__(self, name, debug=True):
-        self.name = name
+    def __init__(self, debug=True):
         if debug:
-            print(f"Generating Key Pair for {self.name} ... ", end="")
+            print(f"Generating Key Pair ... ", end="")
         
         self.public_key, self.private_key = get_keys()
         
