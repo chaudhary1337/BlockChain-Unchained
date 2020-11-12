@@ -17,10 +17,10 @@ def generate_prime(n=1024):
 def get_totient(p, q):
     return (p-1)*(q-1)
 
-def gcd(x, y):
+def gcd(a, b):
     while b:
         a, b = b, a % b
-    return x
+    return a
 
 def is_prime(n, k=8):
     """
@@ -63,7 +63,33 @@ def is_prime(n, k=8):
     return True 
 
 def mod_inv(x, mod):
-    return pow(x, mod-2, mod)
+    """
+    Using Extended Euclidean Algorithm.
+    Why not Fermat's Little Theorem? 
+    mod is not guranteed to be prime!
+
+    input:
+        x: number whose modular inverse is to be found
+        mod: inverse found wrt to x
+    return:
+        modular inverse, if found.
+        None if not found.
+    """
+    t = 0; new_t = 1
+    r = mod; new_r = x
+
+    while new_r:
+        q = r // new_r
+
+        (t, new_t) = (new_t, t - q*new_t)
+        (r, new_r) = (new_r, r - q*new_r)
+
+    if r > 1:
+        # invalid case
+        return None
+    else:
+        # incase t becomes negative
+        return (t+mod) % mod
 
 def get_coprime(totient):
     x = random.randint(2, totient-1)
