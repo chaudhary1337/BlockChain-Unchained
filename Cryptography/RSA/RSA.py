@@ -30,13 +30,23 @@ def get_keys(debug=False):
     if debug: print("Done.")
 
     # step 5: get mod inv of e, wrt totient; the private key exponent
+    # NOTE: The algorithm says to use totient, but it does not work.
+    # only on using n, we get a correct response.
     if debug: print("getting private key ...", end="")
-    d = mod_inv(e, totient)
+    d = mod_inv(e, n)
     if debug: print("Done.")
 
     return ({'n': n, 'e': e}, {'p':p, 'q':q, 'd':d})
 
 if __name__ == "__main__":
     public_key, private_key = get_keys(debug=True)
-    print("Public Key: ", public_key['e'])
-    print("Private Key: ", private_key['d'])
+    
+    x = public_key['e']
+    y = private_key['d']
+    m = public_key['n']
+
+    print("Public Key: ", x)
+    print("Private Key: ", y)
+    print("Mod: ", m)
+    if x*y % m == 1:
+        print("CORRECT!")
