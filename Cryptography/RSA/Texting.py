@@ -19,9 +19,6 @@ def make_people_pair(save=True):
             f.write(B_dump)
 
 def import_people():
-    global A
-    global B
-    
     with open('test_subject1.json', 'r') as f:
         A_data = json.load(f)
     
@@ -31,18 +28,18 @@ def import_people():
     A = Person(generate=False, debug=False, data=A_data)
     B = Person(generate=False, debug=False, data=B_data)
 
-def text():
-    import_people()
+    return A, B
 
+def text(text_from, text_to, message):
     commons = {
-        "A_public_key": A.public_key,
-        "B_public_key": B.public_key
+        f"{text_from}_public_key": text_from.public_key,
+        f"{text_to}_public_key": text_to.public_key
     }
 
-    encrypted_message = A.encrypt(commons['B_public_key'], message=42)
-    print(encrypted_message)
-    print(B.decrypt(encrypted_message))
+    encrypted_message = text_from.encrypt(commons[f'{text_to}_public_key'], message)
+    # print(encrypted_message)
+    print(text_to.decrypt(encrypted_message))
 
-# make_people_pair()
-import_people()
-text()
+A, B = import_people()
+message = int(input("Enter Message: "))
+text(B, A, message)
