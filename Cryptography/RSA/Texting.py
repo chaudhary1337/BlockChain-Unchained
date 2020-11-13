@@ -4,10 +4,7 @@ from Person import Person
 def make_people_pair(save=True):
     """
     Generates two peeps with each having valid keys.
-    """
-    global A
-    global B
-    
+    """  
     A = Person()
     B = Person()
 
@@ -46,4 +43,6 @@ def text():
     print(encrypted_message)
     print(B.decrypt(encrypted_message))
 
+# make_people_pair()
+import_people()
 text()
