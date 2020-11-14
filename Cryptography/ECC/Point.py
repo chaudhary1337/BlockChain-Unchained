@@ -52,7 +52,7 @@ class ECPoint():
                 raise ValueError("Point Specified must be on the Curve")
             
             # if points are on the curve, we can get the order
-            self.n = self.get_order()
+            # self.n = self.get_order()
 
     def __repr__(self):
         """
@@ -136,6 +136,8 @@ class ECPoint():
         """
         return bool(4 * self.a**3 + 27 * self.b**2)
     
+    def f(self, x):
+        return self.b + self.a*x + x**3
 
     def is_point_on_curve(self):
         """
@@ -148,7 +150,7 @@ class ECPoint():
         if self.x == None and self.y == None:
             return True
         else:
-            return (self.y**2 == self.b + self.a*self.x + self.x**3)
+            return (self.y**2 == self.f(self.x))
 
     def get_order(self):
         """
@@ -168,9 +170,12 @@ class ECPoint():
     def get_ordinate(self):
         """
         Gets the y for a given x. Overrides the original y, if provided
+        
+        Currently using the sneaky fact. NOT the tonelli shanks algorithm.
         """
-        # TODO: WRITE THIS SH!T. Its been pending for too long :(
-        return 0
+
+        y = pow((self.f(self.x)).value, (self.p+1)//4, self.p)
+        return y
 
 # point1 = ECPoint('inf', 'inf', use_defaults=False, a=0, b=7, p=223)
 # point2 = ECPoint(x=FieldElement(47, 223), y=FieldElement(71, 223), use_defaults=False, a=0, b=7, p=223)
@@ -180,3 +185,6 @@ class ECPoint():
 # print(point4)
 # print(point2.get_order())
 # print(ECPoint(use_defaults=True))
+# y = point2.get_ordinate()
+# point2.y = FieldElement(y, point2.p)
+# print(point2.is_point_on_curve())
