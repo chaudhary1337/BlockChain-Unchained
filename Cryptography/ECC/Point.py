@@ -21,10 +21,11 @@ class ECPoint():
             self.p = (2**256 - 2**32 - 2**9 - 2**8 - 2**7 - 2**6 - 2**4 - 1)
             self.a = 0
             self.b = 7
-            if x == None:
+            if x == None and y == None:
                 x = 0x79be667ef9dcbbac55a06295ce870b07029bfcdb2dce28d959f2815b16f81798
-            if y == None:
                 y = 0x483ada7726a3c4655da4fbfc0e1108a8fd17b448a68554199c47d08ffb10d4b8
+            if x != None and y == None:
+                y = self.get_ordinate()
             self.x = FieldElement(x, self.p)
             self.y = FieldElement(y, self.p)
             self.n = 0xfffffffffffffffffffffffffffffffebaaedce6af48a03bbfd25e8cd0364141
@@ -168,7 +169,8 @@ class ECPoint():
         """
         Gets the y for a given x. Overrides the original y, if provided
         """
-        pass
+        # TODO: WRITE THIS SH!T. Its been pending for too long :(
+        return 0
 
 # point1 = ECPoint('inf', 'inf', use_defaults=False, a=0, b=7, p=223)
 # point2 = ECPoint(x=FieldElement(47, 223), y=FieldElement(71, 223), use_defaults=False, a=0, b=7, p=223)
