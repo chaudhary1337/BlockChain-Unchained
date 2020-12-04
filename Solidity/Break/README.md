@@ -75,3 +75,15 @@ contract SecureVault{
     }
 }
 ```
+
+## Self Destruction
+
+### The Attack
+Info: Self-destruct destroys the contract. It also has to remove any ether stored at the location, so it ends up transferring *all* the ether to the addess supplied, as, ```selfdestruct(transfer_address)```.
+
+We can use this to force send ether to a contract, overriding all the conditions; doesn't matter if the function is non-payable, or there are input restrictions.
+
+We now use this concept to send >=7 ethers, to a game of ```Gamble7```. This over-rides the condition of 1 ether/deposition. However, this comes at the cost of the attacker not getting anything in return; there is no contract which the winning funds can be supplied to!
+
+## Fix
+We relied on the internal ```address(this).balance```. The simple fix is to create our own ```uint public balance``` variable, storing the balance details here.
