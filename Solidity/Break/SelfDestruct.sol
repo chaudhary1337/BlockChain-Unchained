@@ -54,7 +54,27 @@ contract Exploit{
         The remaining Ether stored at that address is sent to a designated target
         and then the storage and code is removed from the state.""
         
-        Source: https://docs.soliditylang.org/en/v0.4.21/introduction-to-smart-contracts.html
+        Source: 
+        https://docs.soliditylang.org/en/v0.4.21/introduction-to-smart-contracts.html
+        
+        =======================================================================
+
+        Selfdestructs in Ethereum are an operation (an OPCODE actually) 
+        at the EVM level, independent of what language or client you are using.
+        For example, calling selfdestruct(address) sends 
+        all of the contract's current balance to address.
+        This is useful when you are finished with a contract, 
+        because it costs far less gas than just sending the balance 
+        with address.send(this.balance).
+        In fact, the SELFDESTRUCT opcode uses negative gas
+        because the operation frees up space on the blockchain 
+        by clearing all of the contract's data.
+        This negative gas deducts from the total gas cost of the transaction, 
+        so if you're doing some clean-up operations first, 
+        SELFDESTRUCT can reduce your gas costs.
+
+        Source: 
+        https://ethereum.stackexchange.com/questions/315/why-are-selfdestructs-used-in-contract-programming
         */
         selfdestruct(addr);
     }
