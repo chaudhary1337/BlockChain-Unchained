@@ -1,9 +1,9 @@
 # Fixing Exploits
 
-## Fixing Underflow/Overflow
+## 1. Fixing Underflow/Overflow
 [SafeMath](https://github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/math/SafeMath.sol)
 
-## ReEntrancy
+## 2. ReEntrancy
 
 ### The Exploit
 Short Answer: Recursion 
@@ -15,7 +15,7 @@ Now, we ask for the wei back. This we do by calling the ```withdraw``` function.
 
 Its only after all of the calls are returned that one realises the damage done. 
 
-#### 1. Logical Fix
+#### a. Logical Fix
 
 Change
 ```javascript
@@ -44,7 +44,7 @@ function withdraw(uint _amount) public {
 }
 ```
 
-#### 2.Using Functional Modifier
+#### b.Using Functional Modifier
 ```javascript
 contract SecureVault{
     mapping(address => uint) public balances;
@@ -76,7 +76,7 @@ contract SecureVault{
 }
 ```
 
-## Self Destruction
+## 3. Self Destruction
 
 ### The Attack
 Short Answer: We take down everyone with us
@@ -122,7 +122,7 @@ contract Gamble7 {
 }
 ```
 
-## Denial of Service
+## 4. Denial of Service
 
 ### The Attack
 Short Answer: We refuse to accept the refund
@@ -133,3 +133,15 @@ Now, note how the contract ```Attack``` does not have any fallback function to a
 
 ### Fix
 Do not auto-refund. Add a new function to withdraw the funds. This way execution will be un-haltered.
+
+
+## 5. Phishing
+
+### The attack
+Short Answer: You trick someone into running your code
+
+Long Answer: You trick someone into running your code.
+
+### Fix
+Change ```tx.origin``` with ```msg.sender```. Ezpz.
+
