@@ -119,7 +119,8 @@ contract Gamble7 {
         (bool sent, ) = msg.sender.call{value: address(this).balance}("");
         require(sent, "Failed to send Ether");
     }
-}```
+}
+```
 
 ## Denial of Service
 
@@ -131,4 +132,4 @@ Long Answer: The contract ```KinfOfEther``` allows only one king, who has maximu
 Now, note how the contract ```Attack``` does not have any fallback function to accept the ether back. This simply means that the transactions will fail; this contract can *not* receive any ether. Thus, we stay the king, by not accepting the refund XD
 
 ### Fix
-Do not auto-refund. Add a new function to withdraw the funds. This was execution will be un-haltered.
+Do not auto-refund. Add a new function to withdraw the funds. This way execution will be un-haltered.
