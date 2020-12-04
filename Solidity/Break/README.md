@@ -79,11 +79,24 @@ contract SecureVault{
 ## Self Destruction
 
 ### The Attack
-Info: Self-destruct destroys the contract. It also has to remove any ether stored at the location, so it ends up transferring *all* the ether to the addess supplied, as, ```selfdestruct(transfer_address)```.
+Short Answer: We take down everyone with us
+
+Long Answer:
+
+Quick Info: Self-destruct destroys the contract. It also has to remove any ether stored at the location, so it ends up transferring *all* the ether to the addess supplied, as, ```selfdestruct(transfer_address)```.
 
 We can use this to force send ether to a contract, overriding all the conditions; doesn't matter if the function is non-payable, or there are input restrictions.
 
-We now use this concept to send >=7 ethers, to a game of ```Gamble7```. This over-rides the condition of 1 ether/deposition. However, this comes at the cost of the attacker not getting anything in return; there is no contract which the winning funds can be supplied to!
+We now use this idea to send >=7 ethers, to a game of ```Gamble7```. This overrides the condition of 1 ether/deposition. However, this comes at the cost of the attacker not getting anything in return; there is no contract which the winning funds can be supplied to!
 
-## Fix
+### Fix
 We relied on the internal ```address(this).balance```. The simple fix is to create our own ```uint public balance``` variable, storing the balance details here.
+
+## Denial of Service
+
+### The Attack
+Short Answer: We refuse to accept the refund
+
+Long Answer: The contract ```KinfOfEther``` allows only one king, who has maximum amount of ether in storage currently. The "kings" are usualy accounts of people, residing in the ```EVM```, along with contracts themselves. Infact what we exploit is partly the fact that user account and contract account addresses are indistinguishable; we can have a contract pretend to be a user. This is not an issue, and is perfectly valid. [Source](https://stackoverflow.com/questions/42081194/where-do-smart-contracts-reside-in-blockchain-ethereum-or-hyperledger)
+
+Now, note how the contract ```Attack``` does not have any fallback function to accept the ether back. This simply means that the transactions will fail; this contract can *not* receive any ether. Thus, we stay the king, by not accepting the refund XD
