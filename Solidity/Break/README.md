@@ -87,10 +87,39 @@ Quick Info: Self-destruct destroys the contract. It also has to remove any ether
 
 We can use this to force send ether to a contract, overriding all the conditions; doesn't matter if the function is non-payable, or there are input restrictions.
 
-We now use this idea to send >=7 ethers, to a game of ```Gamble7```. This overrides the condition of 1 ether/deposition. However, this comes at the cost of the attacker not getting anything in return; there is no contract which the winning funds can be supplied to!
+We now use this idea to send >=7 ethers, to a game of ```Gamble7```. This overrides the condition of 1 ether/deposition. However, this comes at the cost of the attacker not getting anything in return; there is no contract which the winning funds can be supplied to! (this can be bad incase there are other people who have put in 1 ether donations; they lose their money too)
 
 ### Fix
 We relied on the internal ```address(this).balance```. The simple fix is to create our own ```uint public balance``` variable, storing the balance details here.
+
+```javascript
+contract Gamble7 {
+    uint public target = 7 ether;
+    
+    // NOTE: Using private is also a mess; as is explored here.
+    uint private balance;
+    address public winner;
+    
+    function deposit() public payable {
+        require(msg.value == 1 ether, "You have to spend exactly 1 ether!");
+
+        // REPLACE
+        // uint balance = address(this).balance;
+        // WITH
+        balance += msg.value;
+
+        require(balance <= target, "The Game is Over");
+        
+        if(balance == target) winner = msg.sender;
+    }
+ 
+    function claimReward() public {
+        require(msg.sender == winner, "You are not the winner");
+
+        (bool sent, ) = msg.sender.call{value: address(this).balance}("");
+        require(sent, "Failed to send Ether");
+    }
+}```
 
 ## Denial of Service
 
