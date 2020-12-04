@@ -1,6 +1,8 @@
-# Fixing ReEntrancy
+# Fixing Exploits
 
-## Logical Fix
+## Fixing ReEntrancy
+
+### 1. Logical Fix
 
 Change
 ```javascript
@@ -27,7 +29,7 @@ function withdraw(uint _amount) public {
 }
 ```
 
-## Using Functional Modifier
+### 2.Using Functional Modifier
 ```javascript
 contract SecureVault{
     mapping(address => uint) public balances;
