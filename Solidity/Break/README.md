@@ -100,3 +100,6 @@ Short Answer: We refuse to accept the refund
 Long Answer: The contract ```KinfOfEther``` allows only one king, who has maximum amount of ether in storage currently. The "kings" are usualy accounts of people, residing in the ```EVM```, along with contracts themselves. Infact what we exploit is partly the fact that user account and contract account addresses are indistinguishable; we can have a contract pretend to be a user. This is not an issue, and is perfectly valid. [Source](https://stackoverflow.com/questions/42081194/where-do-smart-contracts-reside-in-blockchain-ethereum-or-hyperledger)
 
 Now, note how the contract ```Attack``` does not have any fallback function to accept the ether back. This simply means that the transactions will fail; this contract can *not* receive any ether. Thus, we stay the king, by not accepting the refund XD
+
+### Fix
+Do not auto-refund. Add a new function to withdraw the funds. This was execution will be un-haltered.
