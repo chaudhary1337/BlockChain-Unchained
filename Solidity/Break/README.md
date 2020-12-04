@@ -145,3 +145,34 @@ Long Answer: You trick someone into running your code.
 ### Fix
 Change ```tx.origin``` with ```msg.sender```. Ezpz.
 
+## 6. Hiding (Malicious) Code
+
+### The attack
+Short Answer: Evil Twin
+
+Long Answer: Three contracts, with two visible (Let: A, B) and the other hidden (Let: C). C (The hidden one) is external, having malicious code. A is using an instance of B. B and C look similar; too similar infact. The variables to be accessed from A are already known, and the C contract knows this. It mirrors all; the function signatures, down to the variable sizes (names are irrelevant, look at this from a EVM point of view).
+
+From the outside, it looks as if A is instantiating B. But, if we pass it the address of C, no one knows better.
+
+```javascript
+contract Foo {
+    Bar bar;
+
+    // we pass in the address; which can be of ... an external contract
+    constructor(address _bar) public { bar = Bar(_bar); }
+    function callBar() public { bar.log(); }
+}
+
+```
+
+### The Fix
+```javascript
+contract Foo {
+    Bar bar;
+
+    // That's it! No address can be sneaked in :)
+    constructor() public { bar = new Bar(); }
+    function callBar() public { bar.log(); }
+}
+
+```
