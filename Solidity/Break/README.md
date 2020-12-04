@@ -9,7 +9,7 @@
 Short Answer: Recursion 
 
 Long Answer:
-We deploy the contract ```Attack``` with the address of the SecureVault. We now call the ```attack``` function, and send it ```1 wei```. This is deposited to the vault.
+We deploy the contract ```Attack``` with the address of the ```SecureVault```. We now call the ```attack``` function, and send it ```1 wei```. This is deposited to the vault.
 
 Now, we ask for the wei back. This we do by calling the ```withdraw``` function. The function now wants to send us the money back, but instead of letting it complete, in the ```fallback``` (the function which is called by ```withdraw```) function, we call the ```withdraw``` function again. This sends the function in a recursive loop, only stopping when there are ```1 wei``` left. We take the last wei as well :).
 
