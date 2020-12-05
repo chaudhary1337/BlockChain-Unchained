@@ -83,7 +83,8 @@ contract Attack {
 contract HoneyPot {
     event Log(address caller, uint amount, uint action);
 
-    function log(address _caller, uint _amount, uint _action) public pure{
+    function log(address _caller, uint _amount, uint _action) public{
         if(_action == 1) revert("gotcha!");
+        emit Log(_caller, _amount, _action);
     }
 }

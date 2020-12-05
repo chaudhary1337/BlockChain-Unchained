@@ -176,3 +176,27 @@ contract Foo {
 }
 
 ```
+
+## 7. Honey Pot
+
+### The attack
+In this case, we trick the attacker into thinking that the ```SceureVault``` has a re-entrancy exploit.
+We then trap the attacker into our honeypot, which is hidden away. 
+
+Steps:
+deploy ```HoneyPot```
+deploy ```SceureVault``` with address of ```HoneyPot```
+deploy ```Attack``` with address of ```SceureVault```
+run the ```attack``` function inside of ```Attack```
+get trapped
+
+NOTE: The trap essentially reverts the state changed by the ```withdraw``` function. This means ether can be deposited into the vault, but not be taken out. So, is the money lost forever? No. We can add a self-destruct functionality, that can transfer the funds, to the required address.
+
+### The Fix
+As a hacker this time, you need to check the difference between:
+
+```javascript 
+bar = Bar(_bar);
+// VERSUS
+bar = new Bar();
+```
