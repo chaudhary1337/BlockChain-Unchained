@@ -15,10 +15,15 @@ to be added
 
 ## Solidity
 An Exploration into the world of smart contracts.
-I have a stab at Building Smart Contracts, which are under ```./Solidity/Build/```. Meanwhile also exploring the Exploits and vulnerabilities found in Solidity: From ```Re-Entrancy``` exploits draining all the ether from a smart contract and ```Phishing Attacks``` to get Priviledge Escalation, upto catching other Hackers using ```HoneyPot``` retaliation.  
+I have a stab at Building Smart Contracts, which are under ```./Solidity/Build/```. Meanwhile also exploring the Exploits and Vulnerabilities found in Solidity: From ```Re-Entrancy``` exploits draining all the ether from a smart contract and ```Phishing Attacks``` to get Priviledge Escalation, upto catching other Hackers using ```HoneyPot``` Retaliation.  
 
 ### Build
 I explore the bit by bit building of Solidity Code, along with Solidity Best Practices.
+0. Hello World
+1. Getters and Setters
+2. Gas
+3. Modifier: Pure and View
+
 
 ### Break
 A list of all the Solidity Exploits:
