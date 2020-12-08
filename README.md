@@ -19,11 +19,12 @@ I have a stab at Building Smart Contracts, which are under ```./Solidity/Build/`
 
 ### Build
 I explore the bit by bit building of Solidity Code, along with Solidity Best Practices.
+
 0. Hello World
 1. Getters and Setters
 2. Gas
-3. Modifier: Pure and View
-
+3. Modifier: Pure, View, Other
+4. Inderitance
 
 ### Break
 A list of all the Solidity Exploits:
