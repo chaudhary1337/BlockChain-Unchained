@@ -32,7 +32,7 @@ contract Attack {
     SecureVault public securevault;
 
     // initialising the instance
-    constructor(address _secureVaultAddress) public {
+    constructor(address _secureVaultAddress) {
         securevault = SecureVault(_secureVaultAddress);
     }
 

@@ -22,7 +22,7 @@ contract SecureVault{
     mapping(address => uint) public balances;
     Logger logger;
 
-    constructor(Logger _logger) public { logger = Logger(_logger); }
+    constructor(Logger _logger) { logger = Logger(_logger); }
 
     function deposit() public payable { 
         balances[msg.sender] += msg.value; 
@@ -58,7 +58,7 @@ contract Logger {
 contract Attack {
     SecureVault public securevault;
 
-    constructor(address _secureVaultAddress) public {
+    constructor(address _secureVaultAddress) {
         securevault = SecureVault(_secureVaultAddress);
     }
 

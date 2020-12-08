@@ -20,7 +20,7 @@ contract KingOfEther {
 contract Attack {
     KingOfEther kingOfEther;
 
-    constructor(KingOfEther _kingOfEther) public {
+    constructor(KingOfEther _kingOfEther) {
         kingOfEther = KingOfEther(_kingOfEther);
     }
 

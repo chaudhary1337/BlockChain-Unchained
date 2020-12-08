@@ -17,7 +17,7 @@ contract Bar {
 contract Foo {
     Bar bar;
 
-    constructor(address _bar) public { bar = Bar(_bar); }
+    constructor(address _bar) { bar = Bar(_bar); }
     function callBar() public { bar.log(); }
 }
 
