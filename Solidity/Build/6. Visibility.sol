@@ -39,6 +39,13 @@ contract Parent {
     // function publicCallsExternal() pure public returns(string memory){
     //     return externalFun();
     // }
+
+    // State variables
+    string private privateVar = "my private variable";
+    string internal internalVar = "my internal variable";
+    string public publicVar = "my public variable";
+    // State variables cannot be external so this code won't compile.
+    // string external externalVar = "my external variable";
 }
 
 contract Child is Parent {
