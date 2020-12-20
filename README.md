@@ -11,7 +11,7 @@ A head first dive into the cryptography used in the modern day technologies. I'v
 to be added
 
 ### ECC
-to be added
+Elliptic Curve Cryptography is much more efficient, in the number of bits required to effectively encrypt/decrypt, sign/verify information. 
 
 ## Solidity
 An Exploration into the world of smart contracts.
