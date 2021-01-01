@@ -1,21 +1,9 @@
 # BlockChain-Unchained
-Cryptography & BlockChains from Scratch
-
-## Cryptography
-A head first dive into the cryptography used in the modern day technologies. I've explored RSA & ECC, both of which are already in use widely and have had substantial impact on the current Scuerity Systems. ECC is even more powerful, and has seen applications in blockchain. We explore one of the standards used in Bitcoin; secp256k1.
-
-### Directory Structure
-![Directory Strucutre - Cryptography](https://i.imgur.com/qdU5gZR.png)
-
-### RSA
-to be added
-
-### ECC
-Elliptic Curve Cryptography is much more efficient, in the number of bits required to effectively encrypt/decrypt, sign/verify information. 
+BlockChains & Cryptography from Scratch
 
 ## Solidity
 An Exploration into the world of smart contracts.
-I have a stab at Building Smart Contracts, which are under ```./Solidity/Build/```. Meanwhile also exploring the Exploits and Vulnerabilities found in Solidity: From ```Re-Entrancy``` exploits draining all the ether from a smart contract and ```Phishing Attacks``` to get Priviledge Escalation, upto catching other Hackers using ```HoneyPot``` Retaliation.  
+I have a stab at Building Smart Contracts, which are under ```./Solidity/Build/```. Meanwhile also exploring the Exploits and Vulnerabilities found in Solidity: From ```Re-Entrancy``` exploits draining all the ether from a smart contract and ```Phishing Attacks``` to get Priviledge Escalation, upto catching other Hackers using ```HoneyPot``` retaliation.  
 
 ### Build
 I explore the bit by bit building of Solidity Code, along with Solidity Best Practices.
@@ -44,3 +32,13 @@ A list of all the Solidity Exploits:
 - Honey Pot Attack/ Honey Pot Retaliation
 
 I have also included the fixes for the attacks: [Exploits and Attacks Fixes](https://github.com/SmartyPants042/BlockChain-Unchained/tree/main/Solidity/Break)
+
+
+## Cryptography
+A head first dive into the cryptography used in the modern day technologies. I've explored RSA & ECC, both of which are already in use widely and have had substantial impact on the current Scuerity Systems. ECC is even more powerful, and has seen numerous applications in blockchain. We explore one of the standards used in Bitcoin; `secp256k1`.
+
+### RSA
+decsription to be added
+
+### ECC
+Elliptic Curve Cryptography is much more efficient, in the number of bits required to effectively encrypt/decrypt, sign/verify information. 
