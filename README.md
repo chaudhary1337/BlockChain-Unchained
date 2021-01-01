@@ -25,6 +25,12 @@ I explore the bit by bit building of Solidity Code, along with Solidity Best Pra
 2. Gas
 3. Modifier: Pure, View, Other
 4. Inderitance
+5. Function Modifiers
+6. Visibilities: Public, Private, Internal, External
+7. Error: Require, Assert, Revert
+8. Maps and Arrays Usage
+9. Structs and Enums usage
+10. Payable: Sending and Receiving Ether
 
 ### Break
 A list of all the Solidity Exploits:
@@ -37,9 +43,4 @@ A list of all the Solidity Exploits:
 - Hiding Malicious Code
 - Honey Pot Attack/ Honey Pot Retaliation
 
-I have also included the fixes for the attacks: [Exploits Fixes and Attacks Fixes](https://github.com/SmartyPants042/BlockChain-Unchained/tree/main/Solidity/Break)
-
-
-Current Directory Structure:
-
-![Directory Strucutre - Solidity](https://i.imgur.com/grNBfjj.png)
+I have also included the fixes for the attacks: [Exploits and Attacks Fixes](https://github.com/SmartyPants042/BlockChain-Unchained/tree/main/Solidity/Break)
