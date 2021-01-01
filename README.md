@@ -3,7 +3,7 @@ BlockChains & Cryptography from Scratch
 
 ## Solidity
 An Exploration into the world of smart contracts.
-I have a stab at Building Smart Contracts, which are under ```./Solidity/Build/```. Meanwhile also exploring the Exploits and Vulnerabilities found in Solidity: From ```Re-Entrancy``` exploits draining all the ether from a smart contract and ```Phishing Attacks``` to get Priviledge Escalation, upto catching other Hackers using ```HoneyPot``` retaliation.  
+I have a stab at **building** Smart Contracts, which are under ```./Solidity/Build/```. Meanwhile also exploring the **exploits** and **vulnerabilities** found in Solidity: From ```Re-Entrancy``` exploits draining all the ether from a smart contract and ```Phishing Attacks``` to get *Priviledge Escalation*, upto catching other Hackers using ```HoneyPot``` retaliation.  
 
 ### Build
 I explore the bit by bit building of Solidity Code, along with Solidity Best Practices.
@@ -29,7 +29,7 @@ A list of all the Solidity Exploits:
 - Denial of Service (DoS) Attack
 - Phishing Attack
 - Hiding Malicious Code
-- Honey Pot Attack/ Honey Pot Retaliation
+- Honey Pot Retaliation
 
 I have also included the fixes for the attacks: [Exploits and Attacks Fixes](https://github.com/SmartyPants042/BlockChain-Unchained/tree/main/Solidity/Break)
 
