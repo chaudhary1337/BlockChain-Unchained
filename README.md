@@ -8,17 +8,21 @@ I have a stab at **building** Smart Contracts, which are under ```./Solidity/Bui
 ### Build
 I explore the bit by bit building of Solidity Code, along with Solidity Best Practices.
 
-0. Hello World
-1. Getters and Setters
-2. Gas
-3. Modifier: Pure, View, Other
-4. Inderitance
-5. Function Modifiers
-6. Visibilities: Public, Private, Internal, External
-7. Error: Require, Assert, Revert
-8. Maps and Arrays Usage
-9. Structs and Enums usage
-10. Payable: Sending and Receiving Ether
+- ContractFactory: A contract that generates other contracts; also uses inheritance
+- Error: Require, Assert, Revert
+- FullGasAhead: Usage of Gas in Ethereum
+- FunMod: Using Function Modifiers
+- GetSet: Getter and Setter functions
+- HelloWorld: The classic Hello World
+- Inderitance: Deriving children contracts from parent contracts
+- MapsAndArrays: Usage of maps (dicts) and arrays (lists)
+- Payable: Sending and Receiving Ether
+- PureView: Controlling the views using: Pure, View, Other
+- SigningAndVerification: The heart of BlockChain; signing and verification using ECDSA
+- StructsAndEnums: Self-Explanatory
+- Visibility: Public, Private, Internal, External
+
+Quick Note: `view != visibilities`
 
 ### Break
 A list of all the Solidity Exploits:
